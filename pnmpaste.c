@@ -12,11 +12,19 @@
 
 #include <assert.h>
 
+#if 0
 #include "pm_c_util.h"
 #include "mallocvar.h"
 #include "nstring.h"
 #include "shhopt.h"
 #include "pnm.h"
+#else
+#define	HAVE_BOOL
+#include <stdbool.h>
+#include <pnm.h>
+#include <netpbm-shhopt.h>
+#include "util.h"
+#endif
 
 
 enum boolOp {REPLACE, AND, OR, XOR /*, NAND, NOR, NXOR */ };
@@ -365,7 +373,7 @@ main(int argc, const char ** argv) {
     int newformat;
     unsigned int insertRow, insertCol;
 
-    pm_proginit(&argc, argv);
+    pm_proginit(&argc, (char **)argv);
 
     parseCommandLine(argc, argv, &cmdline);
 
